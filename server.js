@@ -1,7 +1,11 @@
 const express = require('express');
 const fs = require('fs');
+const cors = require('cors'); // Import CORS middleware
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Middleware to enable CORS
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -36,11 +40,6 @@ app.post('/messages', (req, res) => {
   });
 
   res.status(201).json({ message: 'Message sent successfully.', newMessage });
-});
-
-// Root route handler
-app.get('/', (req, res) => {
-  res.send('Welcome to the chat server!');
 });
 
 // Start the server
