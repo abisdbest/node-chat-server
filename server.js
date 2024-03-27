@@ -17,10 +17,11 @@ app.get('/messages', (req, res) => {
   res.json(messages);
 });
 
+// || !ipaddr
 // Endpoint to post a new message
 app.post('/messages', (req, res) => {
   const { username, message, ipaddr } = req.body;
-  if (!username || !message || !ipaddr) {
+  if (!username || !message ) {
     return res.status(400).json({ error: 'Username, IP and message are required.' });
   }
 
