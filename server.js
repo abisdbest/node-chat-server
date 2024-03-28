@@ -71,6 +71,11 @@ app.get('/messages', (req, res) => {
   res.json(messages);
 });
 
+app.post('/checkpassword', (req) => {
+  const { pwd } = req.body;
+  return Buffer.from("Hello World").toString('base64')
+})
+
 // || !ipaddr
 // Endpoint to post a new message
 app.post('/messages', (req, res) => {
