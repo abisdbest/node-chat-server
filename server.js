@@ -71,9 +71,10 @@ app.get('/messages', (req, res) => {
   res.json(messages);
 });
 
-app.get('/checkpassword', (req) => {
-  return Buffer.from("Hello World").toString('base64')
-})
+app.get('/check', (req, res) => {
+  res.json(messages);
+});
+
 
 // || !ipaddr
 // Endpoint to post a new message
