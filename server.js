@@ -71,8 +71,7 @@ app.get('/messages', (req, res) => {
   res.json(messages);
 });
 
-app.post('/checkpassword', (req) => {
-  const { pwd } = req.body;
+app.get('/checkpassword', (req) => {
   return Buffer.from("Hello World").toString('base64')
 })
 
