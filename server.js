@@ -71,7 +71,7 @@ app.get('/messages', (req, res) => {
   res.json(messages);
 });
 
-app.get('/check', (req, res) => {
+app.post('/check', (req, res) => {
   res.json(messages);
 });
 
