@@ -71,8 +71,9 @@ app.get('/messages', (req, res) => {
   res.json(messages);
 });
 
-app.post('/check', (req, res) => {
-  res.json(messages);
+app.post('/checkpassword', (req, res) => {
+  const { password } = req.body;
+  console.log("thingied")
 });
 
 
