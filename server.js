@@ -74,6 +74,7 @@ app.get('/messages', (req, res) => {
 app.post('/checkpassword', (req, res) => {
   const { password } = req.body;
   console.log("thingied")
+  res.status(200).json({ passwordcheck: true });
 });
 
 
