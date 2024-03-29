@@ -74,7 +74,12 @@ app.get('/messages', (req, res) => {
 app.post('/checkpassword', (req, res) => {
   const { password } = req.body;
   console.log("thingied")
-  res.status(200).json({ passwordcheck: true });
+  if (password == "aaa") {
+    res.status(200).json({ passcorrect: true });  
+  }
+  else {
+    res.status(200).json({ passcorrect: false })
+  }
 });
 
 
