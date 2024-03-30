@@ -87,7 +87,7 @@ app.post('/checkpassword', (req, res) => {
 // Endpoint to post a new message
 app.post('/messages', (req, res) => {
   const { username, message, userid } = req.body;
-  if (!username || !message || !userid) {
+  if (!username || !message) {
     return res.status(400).json({ error: 'Username, userID and message are required.' });
   }
 
