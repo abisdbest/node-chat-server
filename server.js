@@ -115,7 +115,7 @@ app.post('/deletemessage', (req, res) => {
   console.log("thingied")
   if (password == "aaa") {
     for (let i = 0; i < messages.length; i++) {
-      if (messages[i].username === username && messages[i].message === message) {
+      if (messages[i].username == username && messages[i].message == message) {
           messages.splice(i, 1)
           break
       }
