@@ -111,7 +111,7 @@ app.post('/messages', (req, res) => {
 });
 
 app.post('/deletemessage', (req, res) => {
-  // const { username, message, password } = req.body;
+  const { username, message, password } = req.body;
   console.log("thingied 2")
   if (true) {
     // for (let i = 0; i < messages.length; i++) {
