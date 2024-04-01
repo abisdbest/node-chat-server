@@ -111,16 +111,16 @@ app.post('/messages', (req, res) => {
 });
 
 app.post('/deletemessage', (req, res) => {
-  const { username, message, password } = req.body;
-  console.log("thingied")
-  if (password == "aaa") {
-    for (let i = 0; i < messages.length; i++) {
-      if (messages[i].username == username && messages[i].message == message) {
-          messages.splice(i, 1)
-          break
-      }
-    }
-    res.status(200)
+  // const { username, message, password } = req.body;
+  console.log("thingied 2")
+  if (true) {
+    // for (let i = 0; i < messages.length; i++) {
+    //   if (messages[i].username == username && messages[i].message == message) {
+    //       messages.splice(  i, 1)
+    //       break
+    //   }
+    // }
+    res.status(200).json({ done: true })
   }
   else {
     res.status(401)
