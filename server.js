@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors'); // Import CORS middleware
+const e = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -10,7 +11,11 @@ app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-let messages = [];
+let messages = [{
+  username: "e",
+  message: "a",
+  userid: 99
+}];
 
 let userIDs = [];
 
@@ -110,14 +115,14 @@ app.post('/messages', (req, res) => {
   res.status(201).json({ message: 'Message sent successfully.', newMessage });
 });
 
-app.post('/deletemessage', (req, res) => {
-  const { username, message, password } = req.body;
+app.get('/deletemessage', (req, res) => {
+  const { otheruser, othermessage, password } = req.body;
   console.log("thingied 2")
-  if (!username || !message || !password) {res.status(400).json({ error: "Not enough parameters" })}
+  if (!otheruser || !othermessage || !password) {res.status(400).json({ error: "Not enough parameters" })}
   else if (password == "aaa"){
     try {
       for (let i = 0; i < messages.length; i++) {
-        if (messages[i].username == username && messages[i].message == message) {
+        if (messages[i].username == otheruser && messages[i].message == othermessage) {
             index = messages.indexOf(i)
             messages.splice(index, 1)
             break
@@ -128,8 +133,8 @@ app.post('/deletemessage', (req, res) => {
     catch (e) {
       res.status(200).json({ deleted: false, error: e })  
     }
-    res.status(200).json({ deleted: true, error: null })
-  }
+    res.status(200).json({ placeholder: messages })
+}
 });
 
 // Start the server
