@@ -113,6 +113,7 @@ app.post('/messages', (req, res) => {
 
 app.post('/deletemessage', (req, res) => {
   const { otheruser, othermessage, password } = req.body;
+  console.log("deleting message: ", req.body);
   if (!otheruser || !othermessage || !password) {
     return res.status(400).json({ error: "you didn't send enough parameters with the request!" });
   } else if (password !== "aaa") {
@@ -122,12 +123,15 @@ app.post('/deletemessage', (req, res) => {
       for (let i = 0; i < messages.length; i++) {
         if (messages[i].username === otheruser && messages[i].message === othermessage) {
           messages.splice(i, 1);
+          console.log("message deleted")
           return res.status(200).json({ deleted: true, messages });
         }
       }
       // If message not found
+      console.log(`message not found, ${messages}`)
       return res.status(404).json({ deleted: false, error: "message not found (but how?) try reloading" });
     } catch (e) {
+      console.log("error: "+e)
       return res.status(500).json({ deleted: false, error: e });
     }
   }
