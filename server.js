@@ -119,7 +119,7 @@ app.post('/deletemessage', (req, res) => {
   else if (password == "aaa"){
     try {
       for (let i = 0; i < messages.length; i++) {
-        if (messages[i].username == username && messages[i].message == message) {
+        if (messages[i].message == message) {
             found = true
             break
         }
