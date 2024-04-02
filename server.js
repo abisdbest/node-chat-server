@@ -11,11 +11,7 @@ app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-let messages = [{
-  username: "e",
-  message: "a",
-  userid: 99
-}];
+let messages = [];
 
 let userIDs = [];
 
