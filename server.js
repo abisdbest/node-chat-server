@@ -111,7 +111,7 @@ app.post('/messages', (req, res) => {
   res.status(201).json({ message: 'Message sent successfully.', newMessage });
 });
 
-app.post('/deletemessage', (req, res) => {
+app.post('/deletemessage', async (req, res) => {
   const { otheruser, othermessage, password } = req.body;
   console.log("deleting message: ", req.body);
   if (!otheruser || !othermessage || !password) {
@@ -120,8 +120,12 @@ app.post('/deletemessage', (req, res) => {
     return res.status(403).json({ error: "access denied. the password is wrong" });
   } else {
     try {
-      for (let i = 0; i < messages.length; i++) {
-        if (messages[i].username === otheruser && messages[i].message === othermessage) {
+      var resp = await fetch(
+        "https://blooket1-chat-server.onrender.com/messages#classroom.google.com"
+      );
+      vals = await resp.json()
+      for (let i = 0; i < vals.length; i++) {
+        if (vals[i].username === otheruser && vals[i].message === othermessage) {
           messages.splice(i, 1);
           console.log("message deleted")
           return res.status(200).json({ deleted: true, messages });
