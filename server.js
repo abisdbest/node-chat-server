@@ -110,6 +110,8 @@ app.post('/messages', (req, res) => {
   res.status(201).json({ message: 'Message sent successfully.', newMessage });
 });
 
+found = false
+
 app.post('/deletemessage', (req, res) => {
   const { username, message, password } = req.body;
   console.log("thingied 2")
@@ -118,7 +120,7 @@ app.post('/deletemessage', (req, res) => {
     try {
       for (let i = 0; i < messages.length; i++) {
         if (messages[i].username == username && messages[i].message == message) {
-            messages.splice(i, 1)
+            found = true
             break
         }
       }
@@ -127,7 +129,7 @@ app.post('/deletemessage', (req, res) => {
     catch (e) {
       res.status(200).json({ deleted: false, error: e })  
     }
-    res.status(200).json({ deleted: true, error: null })
+    res.status(200).json({ deleted: true, error: null, found: found })
   }
 });
 
