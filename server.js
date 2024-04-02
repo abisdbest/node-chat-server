@@ -113,24 +113,24 @@ app.post('/messages', (req, res) => {
 
 app.post('/deletemessage', (req, res) => {
   const { otheruser, othermessage, password } = req.body;
-  console.log("thingied 2")
-  if (!otheruser || !othermessage || !password) {res.status(400).json({ error: "Not enough parameters" })}
-  else if (password == "aaa"){
+  if (!otheruser || !othermessage || !password) {
+    return res.status(400).json({ error: "you didn't send enough parameters with the request!" });
+  } else if (password !== "aaa") {
+    return res.status(403).json({ error: "access denied. the password is wrong" });
+  } else {
     try {
       for (let i = 0; i < messages.length; i++) {
-        if (messages[i].username == otheruser && messages[i].message == othermessage) {
-            index = messages.indexOf(i)
-            messages.splice(index, 1)
-            break
+        if (messages[i].username === otheruser && messages[i].message === othermessage) {
+          messages.splice(i, 1);
+          return res.status(200).json({ deleted: true, messages });
         }
       }
+      // If message not found
+      return res.status(404).json({ deleted: false, error: "message not found (but how?) try reloading" });
+    } catch (e) {
+      return res.status(500).json({ deleted: false, error: e });
     }
-
-    catch (e) {
-      res.status(200).json({ deleted: false, error: e })  
-    }
-    res.status(200).json({ placeholder: messages })
-}
+  }
 });
 
 // Start the server
