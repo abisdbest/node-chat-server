@@ -126,7 +126,8 @@ app.post('/deletemessage', async (req, res) => {
       vals = await resp.json()
       for (let i = 0; i < vals.length; i++) {
         if (vals[i].username === otheruser && vals[i].message === othermessage) {
-          messages.splice(i, 1);
+          index = messages.indexOf(i)
+          messages.splice(index, 1);
           console.log("message deleted")
           return res.status(200).json({ deleted: true, messages });
         }
