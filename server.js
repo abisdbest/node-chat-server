@@ -115,7 +115,7 @@ app.post('/messages', (req, res) => {
   res.status(201).json({ message: 'Message sent successfully.', newMessage });
 });
 
-app.get('/deletemessage', (req, res) => {
+app.post('/deletemessage', (req, res) => {
   const { otheruser, othermessage, password } = req.body;
   console.log("thingied 2")
   if (!otheruser || !othermessage || !password) {res.status(400).json({ error: "Not enough parameters" })}
