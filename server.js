@@ -119,7 +119,7 @@ app.post('/deletemessage', (req, res) => {
       for (let i = 0; i < messages.length; i++) {
         if (messages[i].username == username && messages[i].message == message) {
             index = messages.indexOf(i)
-            messages = messages.splice(index, 1)
+            messages.splice(index, 1)
             break
         }
       }
