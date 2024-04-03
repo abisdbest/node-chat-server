@@ -132,7 +132,7 @@ app.post('/deletemessage', async (req, res) => {
           return res.status(200).json({ deleted: true, messages });
         }
       }
-      // If message not found
+
       console.log(`message not found, ${messages}`)
       return res.status(404).json({ deleted: false, error: "message not found (but how?) try reloading" });
     } catch (e) {
