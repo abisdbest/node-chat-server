@@ -142,6 +142,37 @@ app.post('/deletemessage', async (req, res) => {
   }
 });
 
+app.post('/editmessage', async (req, res) => {
+  const { otheruser, othermessage, editedmsg, password } = req.body;
+  console.log("editing message: ", req.body);
+  if (!otheruser || !othermessage || !editedmsg || !password) {
+    return res.status(400).json({ error: "you didn't send enough parameters with the request!" });
+  } else if (password !== "aaa") {
+    return res.status(403).json({ error: "access denied. the password is wrong" });
+  } else {
+    try {
+      var resp = await fetch(
+        "https://blooket1-chat-server.onrender.com/messages#classroom.google.com"
+      );
+      vals = await resp.json()
+      for (let i = 0; i < vals.length; i++) {
+        if (vals[i].username === otheruser && vals[i].message === othermessage) {
+          index = messages.indexOf(i)
+          messages[i].message = editedmsg
+          console.log("message edited")
+          return res.status(200).json({ edited: true, messages });
+        }
+      }
+
+      console.log(`message not found, ${messages}`)
+      return res.status(404).json({ edited: false, error: "message not found (but how?) try reloading" });
+    } catch (e) {
+      console.log("error: "+e)
+      return res.status(500).json({ edited: false, error: e });
+    }
+  }
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
